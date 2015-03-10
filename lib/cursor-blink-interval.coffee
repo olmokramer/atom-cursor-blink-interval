@@ -1,32 +1,29 @@
 'use strict'
-_ = require 'underscore'
-
 class CursorBlinkInterval
   config:
-    interval:
-      description: 'Interval of the cursor blink - the period between primaryColor and secondaryColor - in milliseconds. Set to 0 to disable blinking (Note: doesn\'t apply to mini editors yet)'
+    cursorBlinkInterval:
+      description: 'Cursor blink interval in milliseconds. Set to 0 to disable blinking (Note: doesn\'t apply to mini editors)'
       type: 'integer'
-      default: 400
+      default: 800
       minimum: 0
 
   activate: ->
-    @configSub = atom.config.observe 'cursor-blink-interval.interval', @applyInterval
+    @configSub = atom.config.observe 'cursor-blink-interval.cursorBlinkInterval', @applyCursorBlinkInterval
     @editorSub = null
 
   deactivate: ->
     @configSub.dispose()
     @editorSub?.dispose?()
 
-  applyInterval: (interval) =>
+  applyCursorBlinkInterval: (cursorBlinkInterval) =>
     @editorSub?.dispose?()
     @editorSub = atom.workspace.observeTextEditors (editor) ->
       editorPresenter = atom.views.getView(editor).component.presenter
-      editorPresenter.cursorBlinkPeriod = interval * 2
       editorPresenter.stopBlinkingCursors(true)
-      if interval > 0
-        editorPresenter.startBlinkingCursorsAfterDelay = do ->
-          _.debounce(editorPresenter.startBlinkingCursors, editorPresenter.getCursorBlinkResumeDelay())
+      if cursorBlinkInterval > 0
+        editorPresenter.cursorBlinkPeriod = cursorBlinkInterval
       else
-        editorPresenter.startBlinkingCursorsAfterDelay = ->
+        editorPresenter.cursorBlinkPeriod = -1 + Math.pow 2, 32
+      editorPresenter.startBlinkingCursors()
 
 module.exports = new CursorBlinkInterval()

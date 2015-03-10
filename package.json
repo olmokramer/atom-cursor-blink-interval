@@ -1,7 +1,7 @@
 {
   "name": "cursor-blink-interval",
   "main": "./lib/cursor-blink-interval",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Control the cursor blinking interval",
   "repository": "https://github.com/olmokramer/atom-cursor-blink-interval",
   "license": "MIT",

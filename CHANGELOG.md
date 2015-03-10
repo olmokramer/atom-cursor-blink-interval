@@ -1,5 +1,8 @@
 # cursor-blink-interval changelog
 
+## 0.2.1
+* Actually remove the `underscore` dependency from `package.json`
+
 ## 0.2.0
 * Disable cursor blinking now also disables in mini editors
 

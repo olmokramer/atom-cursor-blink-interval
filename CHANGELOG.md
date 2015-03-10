@@ -1,5 +1,8 @@
 # cursor-blink-interval changelog
 
+## 0.2.0
+* Disable cursor blinking now also disables in mini editors
+
 ## 0.1.5
 * Fix interval too high
 

@@ -1,3 +1,10 @@
+# cursor-blink-interval changelog
+
+## 0.1.4
+* Update readme
+* Change default value to 800 to match Atom's default
+* Removed the `underscore` dependency
+
 ## 0.1.3
 * Promote [block-cursor](https://atom.io/packages/block-cursor) package in readme :)
 

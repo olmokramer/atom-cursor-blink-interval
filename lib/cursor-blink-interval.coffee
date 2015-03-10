@@ -23,7 +23,7 @@ class CursorBlinkInterval
       if cursorBlinkInterval > 0
         editorPresenter.cursorBlinkPeriod = cursorBlinkInterval
       else
-        editorPresenter.cursorBlinkPeriod = -1 + Math.pow 2, 32
+        editorPresenter.cursorBlinkPeriod = -1 + Math.pow 2, 31
       editorPresenter.startBlinkingCursors()
 
 module.exports = new CursorBlinkInterval()

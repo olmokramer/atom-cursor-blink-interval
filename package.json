@@ -1,0 +1,14 @@
+{
+  "name": "cursor-blink-interval",
+  "main": "./lib/cursor-blink-interval",
+  "version": "0.0.0",
+  "description": "Fancy cursor custimization",
+  "repository": "https://github.com/olmokramer/atom-cursor-blink-interval",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.171.0"
+  },
+  "dependencies": {
+    "underscore": "^1.8.2"
+  }
+}

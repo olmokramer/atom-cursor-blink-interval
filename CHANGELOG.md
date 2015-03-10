@@ -1,5 +1,8 @@
 # cursor-blink-interval changelog
 
+## 0.1.5
+* Fix interval too high
+
 ## 0.1.4
 * Update readme
 * Change default value to 800 to match Atom's default

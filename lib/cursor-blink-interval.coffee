@@ -22,8 +22,10 @@ class CursorBlinkInterval
       editorPresenter.stopBlinkingCursors(true)
       if cursorBlinkInterval > 0
         editorPresenter.cursorBlinkPeriod = cursorBlinkInterval
+        atom.views.getView(atom.workspace).classList.remove 'disable-cursor-blinking'
       else
         editorPresenter.cursorBlinkPeriod = -1 + Math.pow 2, 31
+        atom.views.getView(atom.workspace).classList.add 'disable-cursor-blinking'
       editorPresenter.startBlinkingCursors()
 
 module.exports = new CursorBlinkInterval()

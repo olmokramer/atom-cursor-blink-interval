@@ -7,5 +7,8 @@
   "license": "MIT",
   "engines": {
     "atom": ">0.171.0"
+  },
+  "dependencies": {
+    "atom-package-config-observer": "0.0.2"
   }
 }

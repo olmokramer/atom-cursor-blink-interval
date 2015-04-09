@@ -1,4 +1,6 @@
 'use strict'
+PackageConfigObserver = require 'atom-package-config-observer'
+
 class CursorBlinkInterval
   config:
     cursorBlinkInterval:
@@ -8,24 +10,27 @@ class CursorBlinkInterval
       minimum: 0
 
   activate: ->
-    @configSub = atom.config.observe 'cursor-blink-interval.cursorBlinkInterval', @applyCursorBlinkInterval
-    @editorSub = null
+    @configObserver = new PackageConfigObserver 'cursor-blink-interval'
+    @configObserver.observeGlobalConfig @updateGlobalCursorBlinkInterval
+    @configObserver.observeScopedConfig @updateEditors
 
   deactivate: ->
-    @configSub.dispose()
-    @editorSub?.dispose?()
+    @configObserver.dispose()
 
-  applyCursorBlinkInterval: (cursorBlinkInterval) =>
-    @editorSub?.dispose?()
-    @editorSub = atom.workspace.observeTextEditors (editor) ->
+  updateGlobalCursorBlinkInterval: (config) ->
+    if config.cursorBlinkInterval is 0
+      atom.views.getView(atom.workspace).classList.add 'disable-cursor-blinking'
+    else
+      atom.views.getView(atom.workspace).classList.remove 'disable-cursor-blinking'
+
+  updateEditors: (config, editors) =>
+    cursorBlinkInterval = config.cursorBlinkInterval
+    if cursorBlinkInterval is 0
+      cursorBlinkInterval = -1 + Math.pow 2, 31
+    for editor in editors
       editorPresenter = atom.views.getView(editor).component.presenter
-      editorPresenter.stopBlinkingCursors(true)
-      if cursorBlinkInterval > 0
-        editorPresenter.cursorBlinkPeriod = cursorBlinkInterval
-        atom.views.getView(atom.workspace).classList.remove 'disable-cursor-blinking'
-      else
-        editorPresenter.cursorBlinkPeriod = -1 + Math.pow 2, 31
-        atom.views.getView(atom.workspace).classList.add 'disable-cursor-blinking'
+      editorPresenter.stopBlinkingCursors true
+      editorPresenter.cursorBlinkPeriod = cursorBlinkInterval
       editorPresenter.startBlinkingCursors()
 
 module.exports = new CursorBlinkInterval()

@@ -1,5 +1,8 @@
 # cursor-blink-interval changelog
 
+## 0.3.0
+* Add scoped config support
+
 ## 0.2.1
 * Actually remove the `underscore` dependency from `package.json`
 

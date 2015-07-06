@@ -1,5 +1,8 @@
 # cursor-blink-interval changelog
 
+## 0.3.1
+* Fix #1
+
 ## 0.3.0
 * Add scoped config support
 

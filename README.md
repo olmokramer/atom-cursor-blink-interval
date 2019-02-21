@@ -1,3 +1,7 @@
+# Unmaintained
+
+This package is unmaintained. If you want to take over maintainance, please open an issue and I'll try to transfer the repository to you soon. In the meantime, https://atom.io/packages/stop-cursor-blinking provides a means to disable cursor blinking.
+
 # cursor-blink-interval
 
 Simple package that controls the cursor blinking interval. Set to `0` to disable cursor blinking (well... it will blink once every ~50 days).
